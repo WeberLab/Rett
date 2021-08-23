@@ -3,7 +3,6 @@
 ## August 2021
 
 #!/bin/bash
-clear
 
 if [ $# -lt 5 ]; then
     # TODO: print usage
@@ -27,7 +26,7 @@ ap=$5
 
 fslmaths $t1 -mul 0 $out/zeromask
 
-chmod 444 $out/zeromask.nii.gz
+#chmod 444 $out/zeromask.nii.gz
 
 ## get vozel size
 xxdim=$(fslhd $t1 | grep -w pixdim1 | awk '{print $2}')
@@ -41,12 +40,12 @@ xhalf=$(echo "${xxdim} /2" | bc -l | xargs printf "%0.1f")
 yhalf=$(echo "${yydim} /2" | bc -l | xargs printf "%0.1f")
 zhalf=$(echo "${zzdim} /2" | bc -l | xargs printf "%0.1f")
 
-rn=$(expr $rl - 10)
-ln=$(expr $rl + 10)
-an=$(expr $an - 10)
-pn=$(expr $pn + 10)
-in=$(expr $in - 10)
-sn=$(expr $sn + 10)
+rn=$(echo "$rl - 10" | bc -l)
+ln=$(echo "$rl + 10" | bc -l)
+an=$(echo "$ap - 10" | bc -l)
+pn=$(echo "$ap + 10" | bc -l)
+in=$(echo "$si - 10" | bc -l)
+sn=$(echo "$si + 10" | bc -l)
 
 rnxhalf=$(echo "${rn} + ${xhalf}" | bc -l)
 lnxhalf=$(echo "${ln} - ${xhalf}" | bc -l)
