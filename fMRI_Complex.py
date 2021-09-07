@@ -6,12 +6,16 @@ import cmath
 import numpy as np
 import os
 
+import sys
+realnifti=sys.argv[1]
+imagnifti=sys.argv[2]
+outpath=sys.argv[3]
 
-real = nib.load('sub-AMWRTD01_task-restAP_run-01_bold.nii.gz')
+real = nib.load(realnifti)
 real_data = real.get_fdata()
 real_data.shape
 
-imagin = nib.load('sub-AMWRTD01_task-restAP_run-02_bold.nii.gz')
+imagin = nib.load(imagnifti)
 imagin_data = imagin.get_fdata()
 imagin_data.shape
 
@@ -56,7 +60,7 @@ slice0, slice1, slice2 = slices(phase)
 show_slices([slice0,slice1,slice2])
 
 img = nib.Nifti1Image(magnitude,real.affine, real.header)
-nib.save(img, os.path.join('/home/weberam2/Dropbox/AssistantProf_BCCHRI/Projects/Rett_Syndrome/Data/sub-AMWRTD01/func/','mag.nii.gz'))
+nib.save(img, os.path.join(outpath,'mag.nii.gz'))
 
 img = nib.Nifti1Image(phase,real.affine, real.header)
-nib.save(img, os.path.join('/home/weberam2/Dropbox/AssistantProf_BCCHRI/Projects/Rett_Syndrome/Data/sub-AMWRTD01/func/','phase.nii.gz'))
+nib.save(img, os.path.join(outpath,'phase.nii.gz'))
