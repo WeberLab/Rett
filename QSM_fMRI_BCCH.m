@@ -91,6 +91,5 @@ tic
 [~,~] = unix('rm phase_mcf_0*');
 [~,~] = unix('fslmerge -tr chi.nii.gz chi_0* 0.6');
 [~,~] = unix('fslmerge -tr uphase.nii.gz uphase_0* 0.6');
-[~,~] = unix('rm chi_0*');
-[~,~] = unix('rm uphase_0*');
+[~,cmdout] = unix('rm chi_0*');
 toc
